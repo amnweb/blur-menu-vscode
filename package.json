@@ -1,0 +1,44 @@
+{
+  "name": "blur-menu",
+  "displayName": "Blur Menu",
+  "description": "Enhance your UI experience by applying a blur effect to the menu with this extension.",
+  "version": "0.0.2",
+  "icon": "images/icon.png",
+  "publisher": "Gaga-Dev",
+  "repository": "https://github.com/amnweb/blur-menu-vscode",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "blur-menu.modifyFiles",
+        "title": "Blur Menu - Enable"
+      },
+      {
+        "command": "blur-menu.restoreSettings",
+        "title": "Blur Menu - Disable & Restore system settings"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/mocha": "^10.0.2",
+    "@types/node": "18.x",
+    "eslint": "^8.50.0",
+    "glob": "^10.3.3",
+    "mocha": "^10.2.0",
+    "typescript": "^5.2.2",
+    "@vscode/test-electron": "^2.3.4"
+  }
+}
