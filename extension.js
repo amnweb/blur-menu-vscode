@@ -83,15 +83,19 @@ function createBackup(filePath) {
 	}
 }
 
-function restoreFromBackup(filePath) {
+function restoreFromBackup(filePath,msgShow = true) {
 	const backupPath = `${filePath}.backup`;
 	if (fs.existsSync(backupPath)) {
 		fs.copyFileSync(backupPath, filePath);
-		vscode.window.showInformationMessage(
-			`Settings restored, Restart VS Code to see changes.`
-		);
+		if(msgShow){
+			vscode.window.showInformationMessage(
+				`Settings restored, Restart VS Code to see changes.`
+			);
+		}
 	} else {
-		vscode.window.showInformationMessage(`Backup files not found`);
+		if(msgShow){
+			vscode.window.showInformationMessage(`Backup files not found`);
+		}
 	}
 }
 
@@ -111,28 +115,27 @@ function activate(context) {
 					"No blur level entered. No changes applied."
 				);
 			} else {
+				restoreFromBackup(workbenchCssPath,false);
 				createBackup(workbenchCssPath);
 				createBackup(workbenchJsPath);
-
+				
 				const newLineContent =
-					`.action-widget:after,.context-view.top.left:after,.overflowingContentWidgets>div:after,.workbench-hover-container:after,.find-widget:after,.monaco-menu:after,.shadow-root-host::part(menu)::after{z-index:-1;content:'';position:absolute;left:0;top:0;bottom:0;right:0;backdrop-filter:blur(` +
-					blurThreshold +
-					`px)}`;
+					`.action-widget:after,.context-view.top.left:after,.overflowingContentWidgets>div:after,.workbench-hover-container:after,.find-widget:after,.monaco-menu:after,.shadow-root-host::part(menu)::after,.quick-input-widget:after{z-index:-1;content:'';position:absolute;left:0;top:0;bottom:0;right:0;backdrop-filter:blur(`+blurThreshold+`px)}`;
 				// Update workbench.desktop.main.css file
-				const cssFileContent = fs.readFileSync(
-					workbenchCssPath,
-					"utf-8"
-				);
+				const cssFileContent = fs.readFileSync(workbenchCssPath,"utf-8");
 				const modifiedCssContent = cssFileContent + newLineContent;
 				fs.writeFileSync(workbenchCssPath, modifiedCssContent, "utf-8");
 
 				// Update workbench.desktop.main.js file
 				const jsFileContent = fs.readFileSync(workbenchJsPath, "utf-8");
-				const modifiedJsContent = jsFileContent.replace(
-					/T\.classList\.add\("monaco-menu"\),T\.setAttribute\("role","presentation"\)/g,
-					'T.classList.add("monaco-menu"),T.setAttribute("role","presentation"),T.setAttribute("part","menu")'
-				);
-				fs.writeFileSync(workbenchJsPath, modifiedJsContent, "utf-8");
+				if (!jsFileContent.includes('T.classList.add("monaco-menu"),T.setAttribute("role","presentation"),T.setAttribute("part","menu")')) {
+					const modifiedJsContent = jsFileContent.replace(
+						/T\.classList\.add\("monaco-menu"\),T\.setAttribute\("role","presentation"\)/g,
+						'T.classList.add("monaco-menu"),T.setAttribute("role","presentation"),T.setAttribute("part","menu")'
+					);
+					fs.writeFileSync(workbenchJsPath, modifiedJsContent, "utf-8");
+				};
+				
 				cleanupOrigFiles();
 				applyChecksum();
 				vscode.window.showInformationMessage(

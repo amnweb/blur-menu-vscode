@@ -1,4 +1,9 @@
 # Change Log
+
+### v0.0.3
+- Added support for command center drop down menu. To enable blur add this line in settings.json 
+```"quickInput.background": "#2e333b50"```
+
 ### v0.0.2
 - Fixed popup blur
 
