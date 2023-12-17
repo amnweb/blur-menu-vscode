@@ -14,10 +14,10 @@ Enhance your UI experience by applying a blur effect to the menu with this exten
 
 ```json
 "workbench.colorCustomizations": {
-    "menu.background": "#2e333b60", //context menu
+    "menu.background": "#2e333b70", //context menu
     "menu.selectionBackground": "#4247509a", //context menu hover
-    "editorWidget.background": "#51586320" //widget
-    "quickInput.background": "#2e333b50" //command center drop down menu
+    "editorWidget.background": "#51586320" //widget and tooltip
+    "quickInput.background": "#2e333b00" //command center drop down menu
 }
 ```
 
