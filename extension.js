@@ -118,7 +118,7 @@ function activate(context) {
 				createBackup(workbenchJsPath);
 				
 				const newLineContent =
-					`.action-widget:after,.context-view.top.left:after,.overflowingContentWidgets>div:after,.workbench-hover-container:after,.find-widget:after,.monaco-menu:after,.shadow-root-host::part(menu)::after{z-index:-1;content:'';position:absolute;left:0;top:0;bottom:0;right:0;backdrop-filter:blur(`+blurThreshold+`px)}.quick-input-widget{backdrop-filter:blur(`+blurThreshold+`px)}`;
+					`.action-widget:after,.suggest-details-container:after,.context-view.top.left:after,.overflowingContentWidgets>div:after,.workbench-hover-container:after,.find-widget:after,.monaco-menu:after,.shadow-root-host::part(menu)::after{z-index:-1;content:'';position:absolute;left:0;top:0;bottom:0;right:0;backdrop-filter:blur(`+blurThreshold+`px)}.quick-input-widget{backdrop-filter:blur(`+blurThreshold+`px)}`;
 				// Update workbench.desktop.main.css file
 				const cssFileContent = fs.readFileSync(workbenchCssPath,"utf-8");
 				const modifiedCssContent = cssFileContent + newLineContent;

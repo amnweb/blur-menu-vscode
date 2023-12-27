@@ -2,7 +2,7 @@
   "name": "blur-menu",
   "displayName": "Blur Menu",
   "description": "Enhance your UI experience by applying a blur effect to the menu with this extension.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "icon": "images/icon.png",
   "publisher": "Gaga-Dev",
   "repository": "https://github.com/amnweb/blur-menu-vscode",
