@@ -1,5 +1,8 @@
 # Change Log
 
+### v0.0.5
+- Added new option to enable some animations in VSCode.
+
 ### v0.0.4
 - Added blur in suggest-details-container in editor
 
