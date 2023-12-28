@@ -1,5 +1,8 @@
 # Change Log
 
+### v0.0.6
+- Fixed bugs.
+
 ### v0.0.5
 - Added new option to enable some animations in VSCode.
 
