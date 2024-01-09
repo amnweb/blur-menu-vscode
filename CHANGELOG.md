@@ -1,5 +1,10 @@
 # Change Log
 
+### v0.0.7
+- VSCode version (1.86+)
+- Fixed bugs.
+- Switch to using sha256 for checksums
+
 ### v0.0.6
 - Fixed bugs.
 

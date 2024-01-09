@@ -78,7 +78,7 @@ function restoreChecksum() {
 function computeChecksum(file) {
 	var contents = fs.readFileSync(file);
 	return crypto
-		.createHash("md5")
+		.createHash("sha256")
 		.update(contents)
 		.digest("base64")
 		.replace(/=+$/, "");
@@ -153,20 +153,20 @@ function activate(context) {
 			const modifiedCssContent = cssFileContent + newLineContent;
 			fs.writeFileSync(workbenchCssPath, modifiedCssContent, "utf-8");
 
+
 			// Update workbench.desktop.main.js file
 			const jsFileContent = fs.readFileSync(workbenchJsPath, "utf-8");
-			if (
-				!jsFileContent.includes(
-					'T.classList.add("monaco-menu"),T.setAttribute("role","presentation"),T.setAttribute("part","menu")'
-				)
-			) {
+			const regexToCheck = /([A-Z])\.classList\.add\("monaco-menu"\),\1\.setAttribute\("role","presentation"\)/;
+			// Test the file content against the regex
+			if (regexToCheck.test(jsFileContent)) {
+				// Replace the matched pattern with the new string
 				const modifiedJsContent = jsFileContent.replace(
-					/T\.classList\.add\("monaco-menu"\),T\.setAttribute\("role","presentation"\)/g,
-					'T.classList.add("monaco-menu"),T.setAttribute("role","presentation"),T.setAttribute("part","menu")'
+					regexToCheck,
+					'$1.classList.add("monaco-menu"),$1.setAttribute("role","presentation"),$1.setAttribute("part","menu")'
 				);
+				// Write the modified content back to the original file
 				fs.writeFileSync(workbenchJsPath, modifiedJsContent, "utf-8");
 			}
-
 			cleanupOrigFiles();
 			applyChecksum();
 			promptRestart("You must restart VS Code to see changes");
