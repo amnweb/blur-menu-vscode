@@ -156,7 +156,7 @@ function activate(context) {
 
 			// Update workbench.desktop.main.js file
 			const jsFileContent = fs.readFileSync(workbenchJsPath, "utf-8");
-			const regexToCheck = /([A-Z])\.classList\.add\("monaco-menu"\),\1\.setAttribute\("role","presentation"\)/;
+			const regexToCheck = /([A-Za-z])\.classList\.add\("monaco-menu"\),\1\.setAttribute\("role","presentation"\)/;
 			// Test the file content against the regex
 			if (regexToCheck.test(jsFileContent)) {
 				// Replace the matched pattern with the new string
