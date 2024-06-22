@@ -1,6 +1,6 @@
 # Change Log
 
-### v0.0.9
+### v0.1.0
 - Fixed menu blur.
 
 ### v0.0.7
