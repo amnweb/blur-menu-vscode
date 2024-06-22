@@ -1,5 +1,8 @@
 # Change Log
 
+### v0.0.9
+- Fixed menu blur.
+
 ### v0.0.7
 - VSCode version (1.86+)
 - Fixed bugs.
